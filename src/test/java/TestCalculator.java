@@ -13,6 +13,6 @@ public class TestCalculator {
     @Test
     public void testSub() {
         Calculator calc = new Calculator();
-        Assert.assertEquals(calc.sum(4, 3), 1);
+        Assert.assertEquals(calc.sub(4, 3), 1);
     }
 }
