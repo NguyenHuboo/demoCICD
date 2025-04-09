@@ -1,0 +1,28 @@
+name: Java Test #Tên workflow
+
+on: #định nghĩa các sự kiện để kích hoạt workflow
+  pull_request: # sự kiện pull_request: khi có pull request được mở hoặc cập nhật
+    branches: #các nhánh tác động bởi sự kiện
+      - main
+  push: # sự kiện push: khi có commit được đẩy lên
+    branches:
+      - main
+
+jobs: # job là hành động được thực hiện trong sự kiện
+  build:
+    name: Test on Windows # tên hiển thị của job
+    runs-on: windows-latest # job sẽ chạy trên một môi trường ảo với hệ điều hành windows với phiên bản mới nhất
+
+    steps: # các bước thực hiện
+      - name: Checkout Code
+        uses: actions/checkout@v3 # tác dụng của action: clone toàn bộ mã nguồn của repository
+
+      - name: Set up JDK
+        uses: action/setup-java@v3 # tác dụng của action: cài đặt jdk
+        with:
+          distribution: 'temurin' # nhà cung cấp jdk
+          java-version: '21' # phiên bản jdk
+
+      - name: Build and test on windows
+        run: mvn clean verify # build dự án
+        # và thực hiện tất cả các kiểm thử được định nghĩa trong dự án
